@@ -1,0 +1,3 @@
+requirements.txt
+.gitignore
+tests/rings/samples/*

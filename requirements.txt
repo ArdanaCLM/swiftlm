@@ -1,0 +1,8 @@
+eventlet
+setuptools
+netifaces
+enum34
+python-swiftclient
+python-keystoneclient
+pyyaml
+psutil<3.1.0,>=2.2.1

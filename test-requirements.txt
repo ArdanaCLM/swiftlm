@@ -1,0 +1,15 @@
+pep8
+pygments
+nose
+nose-exclude
+coverage
+nosehtmloutput
+testtools
+requests
+nosexcover
+mox
+mock
+fixtures
+sphinx
+-e git+https://git.suse.provo.cloud/openstack/swift.git@master#egg=swift
+

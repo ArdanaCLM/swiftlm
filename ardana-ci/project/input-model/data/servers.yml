@@ -1,0 +1,96 @@
+#
+# (c) Copyright 2015-2016 Hewlett Packard Enterprise Development LP
+# (c) Copyright 2017 SUSE LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License"); you may
+# not use this file except in compliance with the License. You may obtain
+# a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+# WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+# License for the specific language governing permissions and limitations
+# under the License.
+#
+---
+  product:
+    version: 2
+
+  baremetal:
+    netmask: 255.255.255.0
+    subnet: 192.168.10.0
+    server-interface: eth2
+
+  servers:
+
+    - id: server1
+      ip-addr: 192.168.10.3
+      role: SERVER1-ROLE
+      server-group: AZ1
+      mac-addr: a4:93:0c:4f:7c:73
+      nic-mapping: VAGRANT
+      ilo-ip: 192.168.9.3
+      ilo-password: password
+      ilo-user: admin
+
+    - id: server2
+      ip-addr: 192.168.10.4
+      role: SWPAC-ROLE
+      server-group: AZ1
+      mac-addr: b2:72:8d:ac:7c:6f
+      nic-mapping: VAGRANT
+      ilo-ip: 192.168.9.4
+      ilo-password: password
+      ilo-user: admin
+
+    - id: server3
+      ip-addr: 192.168.10.5
+      role: SWPAC-ROLE
+      server-group: AZ2
+      mac-addr: 8a:8e:64:55:43:76
+      nic-mapping: VAGRANT
+      ilo-ip: 192.168.9.5
+      ilo-password: password
+      ilo-user: admin
+
+    - id: server4
+      ip-addr: 192.168.10.6
+      role: SWPAC-ROLE
+      server-group: AZ3
+      mac-addr: 8a:8e:64:55:44:77
+      nic-mapping: VAGRANT
+      ilo-ip: 192.168.9.6
+      ilo-password: password
+      ilo-user: admin
+
+    - id: server5
+      ip-addr: 192.168.10.7
+      role: SWOBJ-ROLE
+      server-group: AZ1
+      mac-addr: 8a:8e:64:55:42:79
+      nic-mapping: VAGRANT
+      ilo-ip: 192.168.9.7
+      ilo-password: password
+      ilo-user: admin
+
+    - id: server6
+      ip-addr: 192.168.10.8
+      role: SWOBJ-ROLE
+      server-group: AZ2
+      mac-addr: 8a:8e:64:55:46:75
+      nic-mapping: VAGRANT
+      ilo-ip: 192.168.9.8
+      ilo-password: password
+      ilo-user: admin
+
+    - id: server7
+      ip-addr: 192.168.10.9
+      role: SWOBJ-ROLE
+      server-group: AZ3
+      mac-addr: 8a:8e:64:57:41:82
+      nic-mapping: VAGRANT
+      ilo-ip: 192.168.9.9
+      ilo-password: password
+      ilo-user: admin

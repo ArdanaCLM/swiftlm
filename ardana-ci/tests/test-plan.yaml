@@ -1,0 +1,103 @@
+#
+# Copyright 2016 Hewlett Packard Enterprise Development LP
+# Copyright 2017 SUSE LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License"); you may
+# not use this file except in compliance with the License. You may obtain
+# a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+# WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+# License for the specific language governing permissions and limitations
+# under the License.
+#
+---
+
+- name: Test that we have a good cloud
+  logfile: tempest.log
+  prefix: tempest
+  exec:
+    - validate-swift.bash
+  tempest:
+    - "+tempest.api.object_storage"
+
+- name: Test reconfigure
+  logfile: testsuite-reconfigure.log
+  prefix: reconfigure
+  playbooks:
+    - swift-reconfigure.yml
+  exec:
+    - validate-swift.bash
+
+- name: Test stop/start of swift
+  logfile: stop-start.log
+  prefix: stop-start
+  playbooks:
+    - swift-stop.yml
+    - swift-start.yml
+  exec:
+    - validate-swift.bash
+
+- name: Test swift compare model rings
+  logfile: swift-compare-model-rings.log
+  prefix: swift-compare-model-rings
+  playbooks:
+    - swift-compare-model-rings.yml
+  exec:
+    - validate-swift.bash
+
+- name: Test swift dispersion populate
+  logfile: swift-dispersion-populate.log
+  prefix: swift-dispersion-populate
+  playbooks:
+    - swift-dispersion-populate.yml
+  exec:
+    - validate-swift.bash
+
+- name: Test swift dispersion report
+  logfile: swift-dispersion-report.log
+  prefix: swift-dispersion-report
+  playbooks:
+    - swift-dispersion-report.yml
+  exec:
+    - validate-swift.bash
+
+- name: Test swift reconfigure credentials change
+  logfile: swift-reconfigure-credentials-change.log
+  prefix: swift-reconfigure-credentials-change
+  playbooks:
+    - swift-reconfigure-credentials-change.yml
+  exec:
+    - validate-swift.bash
+
+- name: Test swift upgrade
+  logfile: swift-upgrade.log
+  prefix: swift-upgrade
+  playbooks:
+    - swift-upgrade.yml
+  exec:
+    - validate-swift.bash
+
+- name: Test clusters minus one proxy server
+  # can't bring down object node as erasure coding requires at least 11 disks
+  logfile: shutdown-nodes.log
+  prefix: shutdown-nodes
+  vms:
+    - shutdown:
+        - server4
+  tempest:
+    - "+tempest.api.object_storage"
+
+- name: Bring up downed server and start services
+  logfile: restart-server.log
+  prefix: restart-server
+  vms:
+    - start:
+        - server4
+  playbooks:
+    - swift-start.yml
+  exec:
+    - validate-swift.bash
